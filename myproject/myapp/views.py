@@ -1,5 +1,4 @@
 
-
 from django.conf import settings
 
 from .models import Contacts
@@ -14,7 +13,7 @@ from django.contrib.auth.models import User
 ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 
 # Create your views here.
-# Create your views here.
+
 def home(request):
     
     try:
@@ -77,6 +76,22 @@ def search_view(request):
                 }
                 contexts["Contacts"].append(jsontype)
     return JsonResponse(contexts)
+
+def add_user(request):
+    # print()
+    if(request.POST):
+        firstName = request.POST["firstName"]
+        lastName = request.POST["lastName"]
+        mobileNumber = request.POST["mobileNumber"]
+        email = request.POST["email"]
+        print(firstName,lastName,mobileNumber,email)
+        user = request.user
+        object1 = Contacts(user = user,firstName=firstName,lastName =lastName,mobileNumber=mobileNumber,email=email)
+        object1.save()
+        
+    return render(request,"components/addUser.html",{})
+
+
 
 def login_view(request):
     form =  AuthenticationForm(request,data=request.POST or None)
