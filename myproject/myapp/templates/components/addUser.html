@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    {% if request.user.is_authenticated  %}
+    <form method="POST"  action="#" class="mt-4">
+        {% csrf_token %}
+        <div class="card">
+            <h5 class="card-header">Add Contacts</h5>
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-5">
+                      <input type="text" id = "firstName" name = "firstName" value="" class="form-control" placeholder="First name" required>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5">
+                        <input type="text" id = "lastName" name = "lastName" value="" class="form-control" placeholder="Last name" required>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5">
+                        <input type="number"  id = "mobileNumber" name = "mobileNumber" value="" class="form-control" placeholder="Mobile Number" required>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5">
+                        <input type="email"  id = "email" name = "email" value="" class="form-control" placeholder="Email" required>
+                    </div>
+                </div>
+              <button type="submit" class="btn btn-primary">Add</button>
+              <button type="reset" class="btn btn-danger">Reset</button>
+            </div>
+        </div>
+    </form>  
+    {% else %}
+        <h1>Please Login First</h1> 
+    {% endif %}
+</div>
+
+{% endblock content %}
